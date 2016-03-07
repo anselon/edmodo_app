@@ -11,6 +11,9 @@ To start the application
 - >rake sunspot:reindex
 - >rails s 
 
+
+
+
 Design decisions
 ----------------
-I created a simple one-to-many relationship between owners and products. I chose to keep all owners (teachers, publishers, parents) in one owners table and use a string to indicate the role of each owner. Given the scale of the application (100 products) I thought this solution worked well. I did validate the uniqueness of the products based on the edmodo_url and owners based on their ids in the edmodo api. I created another one-to-many relationship for products and flags with a separate flags table. This design woudld support further development of the flagging system to track additional information such as who created the flag and using what query. This could also help with adding validations to limit the data. Currently, any flag saved is added to the database. 
+I created a simple one-to-many relationship between owners and products. I chose to keep all owners (teachers, publishers, parents) in one owners table and use a string to indicate the role of each owner. Given the scale of the application (100 products) I thought this solution made the most sense. I created another one-to-many relationship for products and flags with a separate flags table. I chose this design because it could support further development of the flagging system to track additional information in the flags table such as who created the flag and using what query. This could help with flag validations to limit the data and make it more meaningful. Currently, I assumeed we wanted to save all flag instances. 
