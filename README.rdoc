@@ -7,8 +7,8 @@ To start the application
 - >bundle install
 - >rake db:migrate
 - >rake migrate_products  	#migrates products from edmodo API
-- >rake sunspot:solr:start
-- >rake sunspot:reindex
+- >rake sunspot:solr:start  #to stop instance must run: >rake sunspot:solr:stop
+- >rake sunspot:reindex     
 - >rails s 
 
 
