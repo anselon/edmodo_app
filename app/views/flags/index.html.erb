@@ -1,23 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing flags</h1>
+<%= render 'page_nav' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Reason</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @flags.each do |flag| %>
-      <tr>
-        <td><%= flag.product.title %></td>
-        <td><%= flag.reason %></td>
+<% paginate @flag_products %>
+<% @flag_products.each_slice(3) do |flag_products| %>
+  
+  <div class = "card-deck">
+    <% flag_products.each do |product, flags| %>
+     
+     <div class = "card">
+      <div class = "card-block">
+        <h4 class="card-title push-xs-left"><%= product.title %></h4>
+        <a href = "<%= product.edmodo_url %>" target="_blank">
+          <img class="card-image" src= "<%= product.img_path %>" />
+        </a>
+      </div>
+      <div class= "card-block">
+      <ul class="list-group list-group-flush">
+      <% for flag in flags %>
+        <li class="list-group-item"><%= flag.reason %></li>
+      <% end %>
+       </ul>
+     </div>
 
-      </tr>
+    </div><!-- end card-->
+    
     <% end %>
-  </tbody>
-</table>
+
+  </div><!-- end deck -->
+
+<% end %>
+
+
+<%= render 'page_nav' %>
+

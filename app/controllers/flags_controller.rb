@@ -2,12 +2,17 @@ class FlagsController < ApplicationController
   # GET /flags
   # GET /flags.json
   def index
-    @flags = Flag.all.group(params[:product_id])
+    @flags = Flag.all
+    @flag_products = @flags.group_by{|f| f.product}.to_a
+    @flag_products = Kaminari.paginate_array(@flag_products, total_count: @flag_products.length).page(params[:page]).per(12)
+    
   end
 
   def show 
   end
 
+  # GET /products/1/flags
+  # GET /products/1/flags.json
   def new
     @product = Product.find(params[:product_id])
     @flag = @product.flags.build
@@ -16,8 +21,8 @@ class FlagsController < ApplicationController
   def edit
   end
 
-  # POST /flags
-  # POST /flags.json
+  # POST /products/1/flags
+  # POST /products/1/flags.json
   def create
     @product = Product.find(params[:product_id])
 

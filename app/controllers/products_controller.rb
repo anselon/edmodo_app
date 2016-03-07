@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   def index
     @search = Product.search do 
       fulltext params[:search]
-      paginate(page: params[:page], per_page: 10)
+      paginate(page: params[:page], per_page: 12)
     end
     @products = @search.results
     #@products = Product.all

@@ -1,50 +1,38 @@
 <p id="notice"><%= notice %></p>
+<%= render 'search' %>
 
-<div class="container">
-  <button class="btn"><%= link_to_previous_page @products, 'Prev Page' %></button>
-  <button class="btn"><%= link_to_next_page @products, 'Next Page' %></button>
-</div>
+<%= render 'page_nav' %>
 
-<%= form_tag products_path, :method => :get do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-<% end %>
+  <% paginate @products %>
 
-
-<% paginate @products %>
-<% @products.each_slice(3).each do |products| %>
-<div class = "card-deck">
-  <% products.each do |product| %>
-  <div class = "card">
-
+  <% @products.each_slice(3) do |products| %>
+  <div class = "card-deck">
+    <% products.each do |product| %>
+    <div class = "card">
       <div class="card-block">
-      <h4 class="card-title push-xs-left"><%= product.title %>
-      <%= link_to(("<i class='fa fa-flag fa-inverse'></i>").html_safe, new_product_flag_path(product), remote: true, class: "btn btn-primary pull-xs-right") %></h4>
-      <a href = "<%= product.edmodo_url %>" target="_blank">
-        <img class="card-image" src= "<%= product.img_path %>" />
-      </a>
+        <h4 class="card-title push-xs-left"><%= product.title %>
+        <%= link_to(("<i class='fa fa-flag'></i>").html_safe, new_product_flag_path(product), remote: true, class: "btn btn-danger pull-xs-right") %></h4>
+        <a href = "<%= product.edmodo_url %>" target="_blank">
+          <img class="card-image" src= "<%= product.img_path %>" />
+        </a>
+      </div>
+      <div class = "card-block">
+        <img class = "thumbnail" src = "<%= product.seller_thumb_url %>"/>
+        <div class="card-text"><%= product.price %><%= product.currency %><%= product.avg_rating %>(<%= product.num_raters %>)</div>
+        <!--   <span><%= product.long_desc_html %></span>-->
+        <%if (!product.owner.nil?) %>
+        <div class = "card-text"><%= product.owner.first_name %></div>
+        <%if (!product.owner.role != "Publisher") %>
+        <div class = "card-text"><%= product.owner.last_name %></div>
+        <% end %>
+        <% end %>
+      </div>
     </div>
-    <div class = "card-block">
-      <img class = "thumbnail" src = "<%= product.seller_thumb_url %>"/>
-      <div class="card-text"><%= product.price %><%= product.currency %><%= product.avg_rating %>(<%= product.num_raters %>)</div>
-      <!--   <span><%= product.long_desc_html %></span>-->
-      <%if (!product.owner.nil?) %>
-      <div class = "card-text"><%= product.owner.first_name %></div>
-      <%if (!product.owner.role != "Publisher") %>
-      <div class = "card-text"><%= product.owner.last_name %></div>
-      <% end %>
-      <% end %>
-    </div>
+    <% end %>
   </div>
   <% end %>
 </div>
-<% end %>
 </div>
-</div>
-<div class="container">
-  <button class="btn"><%= link_to_previous_page @products, 'Prev Page' %></button>
-  <button class="btn">Next Page<%= link_to_next_page @products, 'Next Page' %></button>
-</div>
+<%= render 'page_nav' %>
 
 <%= render 'flags/dialog' %>
