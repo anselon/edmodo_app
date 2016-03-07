@@ -29,7 +29,7 @@ class FlagsController < ApplicationController
     params[:flags][:reasons].each do |reason|
        @flag = @product.flags.build(reason: reason)
        @flag.save
-     end
+    end
 
     respond_to do |format|
       if @flag.save

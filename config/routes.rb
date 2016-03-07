@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'products#index'
   resources :products do 
-    resources :flags, :collection => { :create_multiple => :post }
+    resources :flags, shallow: true
   end
   
   resources :owners
@@ -60,4 +60,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
 end
