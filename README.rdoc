@@ -3,13 +3,13 @@
 To start the application 
 -- requires Ruby version > 2.0.0, Rails > 4.0.0
 
->git clone [repo]
->bundle install
->rake db:migrate
->rake migrate_products  	#migrates products from edmodo API
->rake sunspot:solr:start
->rake sunspot:reindex
->rails s 
+- >git clone [repo]
+- >bundle install
+- >rake db:migrate
+- >rake migrate_products  	#migrates products from edmodo API
+- >rake sunspot:solr:start
+- >rake sunspot:reindex
+- >rails s 
 
 Design decisions
 ----------------
