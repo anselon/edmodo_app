@@ -1,28 +1,16 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To start the application 
+-- requires Ruby version > 2.0.0, Rails > 4.0.0
 
-Things you may want to cover:
+>git clone [repo]
+>bundle install
+>rake db:migrate
+>rake migrate_products  	#migrates products from edmodo API
+>rake sunspot:solr:start
+>rake sunspot:reindex
+>rails s 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Design decisions
+----------------
+I created a simple one-to-many relationship between owners and products. I chose to keep all owners (teachers, publishers, parents) in one owners table and use a string to indicate the role of each owner. Given the scale of the application (100 products) I thought this solution worked well. I did validate the uniqueness of the products based on the edmodo_url and owners based on their ids in the edmodo api. I created another one-to-many relationship for products and flags with a separate flags table. This design woudld support further development of the flagging system to track additional information such as who created the flag and using what query. This could also help with adding validations to limit the data. Currently, any flag saved is added to the database. 
