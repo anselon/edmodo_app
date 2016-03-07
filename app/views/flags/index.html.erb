@@ -4,15 +4,16 @@
 
 
 <% paginate @flag_products %>
-<% @flag_products.each_slice(3) do |flag_products| %>
+<% @flag_products.each_slice(3) do | flag_products| %>
   
   <div class = "card-deck">
-    <% flag_products.each do |product, flags| %>
+    <% flag_products.each do |product,flags| %>
+      
      
      <div class = "card">
       <div class = "card-block">
         <h4 class="card-title push-xs-left"><%= product.title %></h4>
-        <a href = "<%= product.edmodo_url %>" target="_blank">
+        <a href = "<%= product.full_url %>" target="_blank">
           <img class="card-image" src= "<%= product.img_path %>" />
         </a>
       </div>

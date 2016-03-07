@@ -1,5 +1,5 @@
 // Add the dialog title
-$('#dialog h3').html("<i class='glyphicon glyphicon-plus'></i> Add New Customer");
+$('#dialog h3').html("Add New Flag(s)");
  
 // Render the new form
 $('.modal-body').html('<%= j render("form") %>');
@@ -9,5 +9,5 @@ $('#dialog').modal("show");
  
 // Set focus to the first element
 $('#dialog').on('shown.bs.modal', function () {
-	  $('.first_input').focus()
+	  $('.first_input').focus();
   })

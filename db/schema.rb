@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20160304223628) do
     t.string   "seller_thumb_url"
     t.string   "edmodo_url"
     t.integer  "price"
-    t.integer  "currency"
+    t.string  "currency"
     t.integer  "avg_rating"
     t.integer  "num_raters"
     t.text     "long_desc_html"

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'products#index'
   resources :products do 
-    resources :flags
+    resources :flags, :collection => { :create_multiple => :post }
   end
   
   resources :owners

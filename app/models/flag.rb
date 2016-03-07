@@ -6,9 +6,10 @@ class Flag < ActiveRecord::Base
   validates_inclusion_of :reason, :in => REASONS,
                          :message => "%{value} must be included in #{REASONS.join(',')}"
 
+
   def valid_reasons
     REASONS
   end
 
-  #validate_uniqueness_of :product_id , :scope => :reason
+
 end

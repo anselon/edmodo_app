@@ -1,11 +1,11 @@
 class FlagsController < ApplicationController
+
   # GET /flags
   # GET /flags.json
   def index
-    @flags = Flag.all
+    @flags = Flag.select("distinct product_id, reason")
     @flag_products = @flags.group_by{|f| f.product}.to_a
     @flag_products = Kaminari.paginate_array(@flag_products, total_count: @flag_products.length).page(params[:page]).per(12)
-    
   end
 
   def show 
@@ -15,7 +15,7 @@ class FlagsController < ApplicationController
   # GET /products/1/flags.json
   def new
     @product = Product.find(params[:product_id])
-    @flag = @product.flags.build
+    @flags = @product.flags.build
   end
 
   def edit
@@ -26,8 +26,10 @@ class FlagsController < ApplicationController
   def create
     @product = Product.find(params[:product_id])
 
-    @flag = @product.flags.build(flag_params)
-
+    params[:flags][:reasons].each do |reason|
+       @flag = @product.flags.build(reason: reason)
+       @flag.save
+     end
 
     respond_to do |format|
       if @flag.save
@@ -40,18 +42,11 @@ class FlagsController < ApplicationController
     end
   end
 
-    # respond_to do |format|
-    #   if @comment.save
-    #     format.html { redirect_to post_path(@post), notice: 'Comment was successfully created.' }
-    #     format.json { render json: @comment, status: :created, location: @comment }
-    #     format.js   {
-    #       @post = @comment.post
-    #     }
-    #   else
-    #     format.html { render action: "new" }
-    #     format.json { render json: @comment.errors, status: :unprocessable_entity }
-    #   end
-    # end
+  def create_multiple
+    @product = Product.find(params[:product_id])
+
+    @flag = @product.flags.build(flag_params)
+  end
 
 
   # DELETE /products/1
@@ -72,6 +67,6 @@ class FlagsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def flag_params
-    params.require(:flag).permit(:product_id, :reason)
+    params.require(:flags).permit(:product_id, :reason)
   end
 end

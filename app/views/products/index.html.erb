@@ -12,18 +12,39 @@
       <div class="card-block">
         <h4 class="card-title push-xs-left"><%= product.title %>
         <%= link_to(("<i class='fa fa-flag'></i>").html_safe, new_product_flag_path(product), remote: true, class: "btn btn-danger pull-xs-right") %></h4>
-        <a href = "<%= product.edmodo_url %>" target="_blank">
+      </div>
+      <div class="card-block">
+        <a href = "<%= product.full_url %>" target="_blank">
           <img class="card-image" src= "<%= product.img_path %>" />
         </a>
+    <br/><br/>
+        <div class="card-text">
+          <% if product.price.to_i == 0 %>
+          <span> Free </span>
+          <%else%>
+            <%= product.price %><%= product.currency %>
+          <%end%>
+        </div>
+
+      <div class="card-text">
+        <% if product.num_raters.to_i > 0 %>
+          <% (product.avg_rating.to_i).times do %>
+            <i class='fa fa-star'></i>
+          <%end%>
+          (<%= product.num_raters %>)
+        <%else%>
+        <span> No Reviews </span> 
+        <% end %>
       </div>
+    </div>
       <div class = "card-block">
         <img class = "thumbnail" src = "<%= product.seller_thumb_url %>"/>
-        <div class="card-text"><%= product.price %><%= product.currency %><%= product.avg_rating %>(<%= product.num_raters %>)</div>
+
         <!--   <span><%= product.long_desc_html %></span>-->
         <%if (!product.owner.nil?) %>
-        <div class = "card-text"><%= product.owner.first_name %></div>
-        <%if (!product.owner.role != "Publisher") %>
-        <div class = "card-text"><%= product.owner.last_name %></div>
+        <span class = "card-text"><%= product.owner.first_name %></span>
+        <%if (product.owner.role != "publisher") %>
+        <span class = "card-text"><%= product.owner.last_name %></span>
         <% end %>
         <% end %>
       </div>

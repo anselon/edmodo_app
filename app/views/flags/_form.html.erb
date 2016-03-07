@@ -1,19 +1,24 @@
-<%= form_for([@product, @flag], remote: true, :html => { :role => "form" }) do |f| %>
-<div id="error_explanation" class="bg-danger text-danger">
+<%= form_for([@product, @flags], remote: true, :html => { :role => "form" }) do |f| %>
+<div id="response">
 </div>
  
 <div class="row">
  <div class="col-sm-6">
   <div class="form-group">
     <% for reason in Flag::REASONS %>
-    <%= f.label reason, :class => "control-label" %>
-    <%= f.check_box :reason, {:class => "form-control"},reason, nil  %>
+      <div class="checkbox">
+	    <label>
+        <%= check_box_tag 'flags[reasons][]', reason %> 
+   
+    		<span class="push-xs-left"><%= reason %><span>
+	    	
+	    	</label>
+		</div>
     <% end %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.submit  "Save", :class => "btn btn-primary" %>
-  </div>
+ 
+
+   <%= f.submit  "Save", :class => "btn btn-primary" %>
+ </div>
 </div>
 </div>
 <% end %>
