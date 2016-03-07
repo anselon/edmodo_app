@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  img_path: MyString
+  seller_thumb_url: MyString
+  edmodo_url: MyString
+  price: 1
+  currency: 1
+  avg_rating: 1
+  num_raters: 1
+  long_desc_html: MyText
+  owner_id: 
+
+two:
+  title: MyString
+  img_path: MyString
+  seller_thumb_url: MyString
+  edmodo_url: MyString
+  price: 1
+  currency: 1
+  avg_rating: 1
+  num_raters: 1
+  long_desc_html: MyText
+  owner_id: 

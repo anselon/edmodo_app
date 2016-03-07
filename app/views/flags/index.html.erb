@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing flags</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Reason</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @flags.each do |flag| %>
+      <tr>
+        <td><%= flag.product.title %></td>
+        <td><%= flag.reason %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
